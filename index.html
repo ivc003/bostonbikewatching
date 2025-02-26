@@ -10,6 +10,11 @@
 <body>
     <h1>🚴🏼‍♀️ Bikewatching</h1>
     <p>An interactive map visualization of bike traffic in Boston.</p>
+    <label for="time-slider">Filter by time:</label>
+    <input type="range" id="time-slider" min="-1" max="1440" value="-1">
+    <em id="any-time" >(any time)</em>
+    <time id="selected-time" style="display: block;">Any time</time>
+    <hr>
     <div id="map">
         <svg></svg>
     </div>

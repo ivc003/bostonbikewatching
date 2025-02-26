@@ -38,3 +38,35 @@ html, body {
 svg circle {
     pointer-events: auto;  /* Allow interaction for circles */
 }
+
+header {
+    display: flex;
+    gap: 1em;
+    align-items: baseline;
+}
+
+h1 {
+    margin: 0em;
+}
+
+p {
+    margin-top: 1em;
+}
+
+
+input[type="range"] {
+    width: 200px; /* Set the slider width */
+}
+
+time {
+    display: block; /* Make the time element block level so it appears on its own line */
+    font-size: 1rem;
+    margin-top: 0.5em;
+}
+
+em {
+    color: lightgray;  /* Lighter color for the "Any time" label */
+    font-style: italic;
+    display: block;
+}
+
