@@ -168,11 +168,18 @@ function createStationCircles() {
         .attr('fill', 'blue')
         .attr('stroke', 'white')
         .attr('stroke-width', 1)
-        .attr('opacity', 0.7);
-    
+        .attr('opacity', 0.7)
+        .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic)); // Set CSS variable for color
+
     // Add tooltips as separate selections
     circles.append('title')
         .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+    
+    // Apply the fill color based on departure ratio
+    circles.style("fill", function(d) {
+        const departureRatio = d.departures / d.totalTraffic;
+        return `color-mix(in oklch, steelblue ${departureRatio * 100}%, darkorange)`;
+    });
     
     // Initial position update
     updatePositions();
@@ -301,8 +308,16 @@ function updateCircles() {
     circles
         .attr('r', d => radiusScale(d.totalTraffic))
         .select('title')
-        .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
-    
+        .text(d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);   
+        
+    // Apply the fill color based on departure ratio
+    circles.style("fill", function(d) {
+        const departureRatio = d.departures / d.totalTraffic;
+        return `color-mix(in oklch, steelblue ${departureRatio * 100}%, darkorange)`;
+    });    
+
     // Update positions
     updatePositions();
 }
+
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
