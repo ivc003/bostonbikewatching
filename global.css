@@ -89,48 +89,62 @@ circle {
   
   .legend {
     position: absolute;
-    bottom: 20px;  /* Adjust distance from the bottom */
+    bottom: 20px;  /* Adjust distance from the bottom of the map */
     left: 50%;
-    transform: translateX(-50%);  /* Center the legend */
+    transform: translateX(-50%);  /* Center the legend horizontally */
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     padding: 10px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    justify-content: space-around;  /* Align legend items horizontally */
+    gap: 16px; /* Space between legend items */
+    margin-block: 20px; /* Space between the map and the legend */
     font-family: Arial, sans-serif;
     z-index: 10; /* Ensure it stays above other content */
   }
   
-  .legend-item {
+  .legend div {
     display: flex;
     align-items: center;
-    gap: 8px; /* Smaller gap between swatch and label */
+    gap: 8px; /* Space between color swatch and label */
+    font-size: 14px;
   }
   
-  .legend-swatch {
+  /* Apply the color scale to both map circles and legend items */
+  .legend div {
+    --departure-ratio: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .legend div::before {
+    content: "";
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: transparent;
-    --departure-ratio: 0; /* Default value, will be overwritten by inline style */
-    display: inline-block;
-    position: relative;
-    flex-shrink: 0;
-  }
-  
-  .legend-swatch::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: transparent;
-    border-radius: 50%;
     background: color-mix(in oklch, steelblue calc(100% * var(--departure-ratio)), darkorange);
   }
   
-  .legend-label {
-    font-size: 14px;
+  #map circle {
+    --departure-ratio: 0;
+    /* This will set the color on the circles dynamically */
+    fill: color-mix(in oklch, steelblue calc(100% * var(--departure-ratio)), darkorange);
+  }
+  
+  /* To ensure that the legend has some margin and isn't too close to the map */
+  .legend {
+    margin-block: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px;
+    border-radius: 5px;
   }
