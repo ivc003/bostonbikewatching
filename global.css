@@ -80,3 +80,57 @@ circle {
     );
     fill: var(--color);
 }
+
+#map-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Or set a specific height for the map */
+  }
+  
+  .legend {
+    position: absolute;
+    bottom: 20px;  /* Adjust distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);  /* Center the legend */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    z-index: 10; /* Ensure it stays above other content */
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Smaller gap between swatch and label */
+  }
+  
+  .legend-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: transparent;
+    --departure-ratio: 0; /* Default value, will be overwritten by inline style */
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .legend-swatch::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border-radius: 50%;
+    background: color-mix(in oklch, steelblue calc(100% * var(--departure-ratio)), darkorange);
+  }
+  
+  .legend-label {
+    font-size: 14px;
+  }
